@@ -5,6 +5,16 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator, FixedLocator
 
+
+################################################################################
+# ESTADO DA SESSÃO
+
+if 'dados' not in st.session_state:
+    st.session_state['dados'] = None
+
+dados = st.session_state['dados']
+
+
 #############################################################
 # PARÂMETROS DE ENTRADA
 
@@ -26,11 +36,24 @@ with st.sidebar:
                     step=10
                    )
 
+
 #############################################################
 # GERAR O PAPEL
 
-div_v = range(0, v+1, 10)
-div_h = range(0, h+1, 10)
+def gravar_dados(dados):
+    st.session_state['dados'] = dados
+
+
+def calcular_escala(h, v, dados):
+    if type(dados) is pd.DataFrame:
+        div_h = range(0, 100, 10)
+        div_v = range(0, 100, 10)
+
+    else:
+        div_h = range(0, h+1, 10)
+        div_v = range(0, v+1, 10)
+
+    return div_h, div_v
 
 
 def gerar_papel(div_h, div_v):
@@ -65,6 +88,9 @@ def gerar_papel(div_h, div_v):
     
     return fig, ax
 
+
+div_h, div_v = calcular_escala(h, v, dados)
+
 fig, ax = gerar_papel(div_h, div_v)
 
 df = pd.DataFrame(columns=['x','y','erro'])
@@ -73,7 +99,9 @@ df = pd.DataFrame(columns=['x','y','erro'])
 
 col1, col2 = st.columns([2,2])
 with col1:
-    st.data_editor(df, num_rows='dynamic')
+    dados = st.data_editor(df, num_rows='dynamic')
+    st.button('plotar', on_click=gravar_dados, args=(dados,))
+
 with col2:
     st.pyplot(fig)
 
