@@ -87,27 +87,31 @@ def calcular_escala(h, v, dados):
         lim_y = [(dados['y']-dados['erro']).min()-sobra_y/2, (dados['y']+dados['erro']).max()+sobra_y/2]
         limite_bom_x = limite_bom(escala_x, lim_x[1])
         limite_bom_y = limite_bom(escala_y, lim_y[1])
-        div_x = [limite_bom_x-escala_x*h+escala_x*10*i for i in range(0,int(h/10+1))]
-        div_y = [limite_bom_y-escala_y*v+escala_y*10*i for i in range(0,int(v/10+1))]
+        div_h = np.array([limite_bom_x-escala_x*h+escala_x*10*i for i in range(0,int(h/10+1))])
+        div_v = np.array([limite_bom_y-escala_y*v+escala_y*10*i for i in range(0,int(v/10+1))])
 
         # Conversão da escala para milímetro.
-        x_mm = (dados['x'] - div_x[0]) / escala_x
-        y_mm = (dados['y']+dados['erro'] - div_y[0]) / escala_y
-
-        return div_x, div_y
+        x_mm = (dados['x'] - div_h[0]) / escala_x
+        y_mm = (dados['y']+dados['erro'] - div_v[0]) / escala_y
 
     else:
-        div_h = range(0, h+1, 10)
-        div_v = range(0, v+1, 10)
+        div_h = np.arange(0, h+1, 10)
+        div_v = np.arange(0, v+1, 10)
+    
+    div_v_intervalo = div_v.max() - div_v.min()
+    div_h_intervalo = div_h.max() - div_h.min()
 
-    return div_h, div_v
+    aspect_ratio = (v/div_v_intervalo) / (h/div_h_intervalo)
+
+    return div_h, div_v, aspect_ratio
 
 
-def gerar_papel(div_h, div_v):
+@st.cache_data
+def gerar_papel(div_h, div_v, aspect_ratio):
     
     fig, ax = plt.subplots(figsize=(8.3, 11.7))
 
-    ax.set_aspect(1)
+    ax.set_aspect(aspect_ratio)
 
     ax.set_title('Papel milimetrado')
     ax.set_xlabel('eixo horizontal')
@@ -136,9 +140,21 @@ def gerar_papel(div_h, div_v):
     return fig, ax
 
 
-div_h, div_v = calcular_escala(h, v, dados)
+div_h, div_v, aspect_ratio = calcular_escala(h, v, dados)
 
-fig, ax = gerar_papel(div_h, div_v)
+fig, ax = gerar_papel(div_h, div_v, aspect_ratio)
+
+if isinstance(dados, pd.DataFrame):
+    ax.errorbar(
+        dados['x'],
+        dados['y'],
+        yerr = dados['erro'],
+        marker='o',
+        linestyle='none',
+        color='green',
+        label='dados experimentais',
+    )
+
 
 df = pd.DataFrame(columns=['x','y','erro'], dtype='float')
 
