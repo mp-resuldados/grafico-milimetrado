@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -43,11 +45,56 @@ with st.sidebar:
 def gravar_dados(dados):
     st.session_state['dados'] = dados
 
+def fexp(number):
+    (sign, digits, exponent) = Decimal(number).as_tuple()
+    return len(digits) + exponent - 1
+
+def fman(number):
+    return float(Decimal(number).scaleb(-fexp(number)).normalize())
+
+def escala_boa(num):
+    exp = fexp(num)
+    if fman(num) / 5 == 1 or fman(num) / 2 == 1 or fman(num) == 1:
+        return num
+    if fman(num) / 5 > 1:
+        return 10*10**exp
+    if fman(num) / 2 > 1:
+        return 5*10**exp
+    if fman(num) > 1:
+        return 2*10**exp
+    return 10**exp
+
+
+def limite_bom(esc, num):
+    esc_cm = 10*esc
+    return round(num / esc_cm) * esc_cm
+
 
 def calcular_escala(h, v, dados):
     if type(dados) is pd.DataFrame:
-        div_h = range(0, 100, 10)
-        div_v = range(0, 100, 10)
+    ##################################################
+        delta_x = dados['x'].max()-dados['x'].min()
+        delta_y = (dados['y']+dados['erro']).max()-(dados['y']-dados['erro']).min()
+        escala_natural_x = delta_x/h
+        escala_natural_y = delta_y/v
+        escala_x = escala_boa(escala_natural_x)
+        escala_y = escala_boa(escala_natural_y)
+        delta_bom_x = h*escala_x
+        delta_bom_y = v*escala_y
+        sobra_x = delta_bom_x-delta_x
+        sobra_y = delta_bom_y-delta_y
+        lim_x = [dados['x'].min()-sobra_x/2, dados['x'].max()+sobra_x/2]
+        lim_y = [(dados['y']-dados['y_err']).min()-sobra_y/2, (dados['y']+dados['y_err']).max()+sobra_y/2]
+        limite_bom_x = limite_bom(escala_x, lim_x[1])
+        limite_bom_y = limite_bom(escala_y, lim_y[1])
+        div_x = [limite_bom_x-escala_x*h+escala_x*10*i for i in range(0,int(h/10+1))]
+        div_y = [limite_bom_y-escala_y*v+escala_y*10*i for i in range(0,int(v/10+1))]
+
+        # Conversão da escala para milímetro.
+        x_mm = (dados['x'] - div_x[0]) / escala_x
+        y_mm = (dados['y']+dados['y_err'] - div_y[0]) / escala_y
+
+        return div_x, div_y
 
     else:
         div_h = range(0, h+1, 10)
