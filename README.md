@@ -75,7 +75,7 @@ yerry<sub>1</sub> = \[0.1, 0.2, 0.1, 0.3, 0.7\]
 
 O menor valor dos dados é 120.0-0.1=119.9 e o maior é 201.0+0.7=201.7.
 
-&#916y;<sub>1</sub> = 201.7-119.9 = 81.8
+&#916;y<sub>1</sub> = 201.7-119.9 = 81.8
 
 escala natural = &#916;x<sub>1</sub>/280 = 0.2921528571
 
@@ -110,6 +110,9 @@ escala ideal = 50.
 
 O cálculo dos limites é importante para definir as escalas de leitura que vão ser escritas nos eixos. No papel milimetrado, é comum escrever a escala de leitura a cada divisão maior. 
 
+Para que o gráfico fique bem centralizado, devemos entender o espaço que os dados ocupam na região do plot. Os dados vão ocupar o espaço do &#916; que aprendemos a calcular na seção anterior. O espaço do plot depende da escala que vamos utilizar. Por exemplo: se a escala usada vai ser de 1 unidade por divisão e o número de divisões é 180, a região do plot será de 180 unidades. Se o número de divisões for 280, então a região do plot será 280 unidades. Se a escala do plot for 0.5 e o número de divisões for 180, então a região do plot será de 90 undidades. Se o número de divisões for 280, então a região do plot será de 140. Acompanhouu até aqui? Já consegue perceber a regra? Vamos definir a região do plot como &#916;'. A regra é: &#916;' = escala* &#916; Vamos calcular a região do plot dos exemplos que estamos trabalhando:
+***
+x<sub>1</sub>
 
 
 
