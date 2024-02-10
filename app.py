@@ -84,7 +84,7 @@ def calcular_escala(h, v, dados):
         sobra_x = delta_bom_x-delta_x
         sobra_y = delta_bom_y-delta_y
         lim_x = [dados['x'].min()-sobra_x/2, dados['x'].max()+sobra_x/2]
-        lim_y = [(dados['y']-dados['y_err']).min()-sobra_y/2, (dados['y']+dados['y_err']).max()+sobra_y/2]
+        lim_y = [(dados['y']-dados['erro']).min()-sobra_y/2, (dados['y']+dados['erro']).max()+sobra_y/2]
         limite_bom_x = limite_bom(escala_x, lim_x[1])
         limite_bom_y = limite_bom(escala_y, lim_y[1])
         div_x = [limite_bom_x-escala_x*h+escala_x*10*i for i in range(0,int(h/10+1))]
@@ -92,7 +92,7 @@ def calcular_escala(h, v, dados):
 
         # Conversão da escala para milímetro.
         x_mm = (dados['x'] - div_x[0]) / escala_x
-        y_mm = (dados['y']+dados['y_err'] - div_y[0]) / escala_y
+        y_mm = (dados['y']+dados['erro'] - div_y[0]) / escala_y
 
         return div_x, div_y
 
@@ -140,7 +140,7 @@ div_h, div_v = calcular_escala(h, v, dados)
 
 fig, ax = gerar_papel(div_h, div_v)
 
-df = pd.DataFrame(columns=['x','y','erro'])
+df = pd.DataFrame(columns=['x','y','erro'], dtype='float')
 
 #def plotar
 
