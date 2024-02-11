@@ -5,36 +5,30 @@
 
 ## Introdução
 
-Neste trabalho, mostramos como plotar um gráfico perfeito em papel milimetrado e como converter os dados para um plot mais simples e rápido. As seções abaixo ensinam o passo-a-passo desde o cálculo da melhor escala até o plot dos dados e barras de erros. Para dados lineares, há uma seção sobre o método do paraleogramo para o cálculo de coeficientes e incertezas.
+Neste trabalho, mostramos como plotar um gráfico perfeito em papel milimetrado e como converter os dados para um plot mais simples e rápido. As seções abaixo ensinam o passo-a-passo desde o cálculo da melhor escala até o plot dos dados e barras de erros.
 
-Desenvolvemos também uma aplicação para gerar um papel com a quantidade de divisões desejada e plotar os gráficos. Para os dados com comportamento linear, a aplicação dá a opção de gerar uma reta e calcular os coeficientes e incertezas através de uma regressão linear ou do método do paralelogramo. Todas as etapas têm a opção de salvar para impressão.
-
-A aplicação é bastante auto-explicativa mas, no fim do texto, escrevemos uma breve seção de como utilizar.
+Desenvolvemos também uma aplicação para gerar um papel com a quantidade de divisões desejada e plotar os gráficos. A aplicação é bastante auto-explicativa mas, no fim do texto, escrevemos uma breve seção de como utilizar.
 
 ## Objetivos
 
 O objetivo principal é aprender a plotar um gráfico para professor nenhum botar defeito! Como etapas intermediárias do processo, podemos citar:
-- calcular a melhor escala para que os dados ocupem pelo menos metade do papel;
+
+- calcular a melhor escala para que os dados ocupem uma boa área do papel;
 - construir a melhor escala de leitura para os dados;
 - converter os dados a serem plotados para unidades de divisões;
-
-Para dados lineares, vamos aprender a:
-- traçar a melhor reta pelo método visual;
-- construir o paralelogramo para o cálculo dos coeficientes;
-- calcular os coeficientes e suas respectivas incertezas.
 
 ## Dados
 
 O primeiro conjunto de dados a ser considerado são as medidas do papel escolhido. Quanto mais divisões tiver o papel (desde que visualmente distinguíveis), maior a resolução do gráfico. 
 O segundo conjunto de dados são os dados a serem plotados que devem conter abcissas, ordenadas e, opcionalmente, incertezas.
 
-## Cálculo da escala	
+## Cálculo da escala
 
-A escala ideal para um gráfico é aquela em que o gráfico ocupa mais da metade do papel, o plot é fácil de fazer e a leitura dos dados é simples mesmo em pontos interpolados.
+A escala ideal para um gráfico é aquela em que o gráfico fica bem visível no papel, o plot é fácil de fazer e a leitura dos dados é simples mesmo em pontos interpolados.
 
-O primeiro passo para calcular a escala é conhecer os limites dos dados que queremos plotar. Vamos usar um exemplo para tornar a explicação mais clara e interativa. Pensando no conjunto de dados x =  \[10, 20, 30, 40, 50\], os limites de x são 10 e 50. Ou seja, o x varia entre 10 e 50, tendo um &#916;x = 50-10 = 40. A escala natural para o gráfico seria dividir esse &#916;x pelo número de divisões no papel. Como exemplo, vamos usar um papel com 180 divisões na horizontal. Assim, a escala natural seria 40/180 = 0.2777... . Uma escala dízima não parece uma boa ideia, certo? 
+O primeiro passo para calcular a escala ideal para o gráfico é conhecer os limites dos dados que queremos plotar. Vamos usar um exemplo para tornar a explicação mais clara e interativa. Pensando no conjunto de dados x =  \[10, 20, 30, 40, 50\], os limites de x são 10 e 50. Ou seja, o x varia entre 10 e 50, tendo um &#916;x = 50-10 = 40. A escala natural para o gráfico seria dividir esse &#916;x pelo número de divisões no papel. Como exemplo, vamos usar um papel com 180 divisões na horizontal. Assim, a escala natural seria 40/180 = 0.2777... . Mas uma escala dízima não parece uma boa ideia, certo? 
 
-Para o cálculo da escala ideal vamos usar o padrão recomendável de que a escala deve ter a mantissa 1, 2 ou 5. Ou seja, deve ser sempre 1, 2, ou 5 vezes uma potência de 10 (10<sup>-1</sup>, 10<sup>0</sup>, 10&sup1;, 10&sup2;...). Com isso, a escala fica de fácil leitura e interpolação. No exemplo, temos uma escala natural de 2.777 &middot; 10<sup>-1</sup>; com mantissa 2.777... . Para manter o padrão recomendado, precisamos arredondar o valor da mantissa para 1, 2 ou 5, respeitando a condição de que seja maior que a mantissa da escala natural (ou os dados não vão caber no gráfico). Nesse caso, a escala ideal terá mantissa 5 e será dada por 5 &middot;10<sup>-1</sup>, ou seja, a escala ideal do exemplo é 0.5. Com isso, garantimos que os dados ocupem pelo menos metade do papel.
+Para o cálculo da escala ideal vamos usar o padrão recomendável de que a escala deve ter a mantissa 1, 2 ou 5. Ou seja, deve ser sempre 1, 2, ou 5 vezes uma potência de 10 (10<sup>-1</sup>, 10<sup>0</sup>, 10&sup1;, 10&sup2;...). Com isso, a escala fica de fácil leitura e interpolação. No exemplo, temos uma escala natural de 2.777 &middot; 10<sup>-1</sup>; com mantissa 2.777... . Para manter o padrão recomendado, precisamos arredondar o valor da mantissa para 1, 2 ou 5, respeitando a condição de que o valor seja imediatamente maior que a mantissa da escala natural (ou os dados não vão caber no gráfico). Nesse caso, a escala ideal terá mantissa 5 e será dada por 5 &middot;10<sup>-1</sup>, ou seja, a escala ideal do exemplo é 0.5. Com isso, garantimos que os dados ocupem o maior espaço possível do  do papel.
 
 Alguns exemplos:
 
@@ -106,18 +100,46 @@ escala natural = &#916;x<sub>3</sub>/280 = 22.6057142857
 escala ideal = 50.
 ***
 
-## Cálculo dos limites superior e inferior
+## Cálculo da da escala de leitura
 
-O cálculo dos limites é importante para definir as escalas de leitura que vão ser escritas nos eixos. No papel milimetrado, é comum escrever a escala de leitura a cada divisão maior. 
+A escala de leitura são os números que colocamos ao lado dos eixos para fazer a leitura dos dados. Não devemos escrever o valor dos dados plotados na escala de leitura. Ao invés disso, escrevemos valores igulamente espaçados que facilitem a leitura de qualquer ponto do gráfico.
 
-Para que o gráfico fique bem centralizado, devemos entender o espaço que os dados ocupam na região do plot. Os dados vão ocupar o espaço do &#916; que aprendemos a calcular na seção anterior. O espaço do plot depende da escala que vamos utilizar. Por exemplo: se a escala usada vai ser de 1 unidade por divisão e o número de divisões é 180, a região do plot será de 180 unidades. Se o número de divisões for 280, então a região do plot será 280 unidades. Se a escala do plot for 0.5 e o número de divisões for 180, então a região do plot será de 90 undidades. Se o número de divisões for 280, então a região do plot será de 140. Acompanhouu até aqui? Já consegue perceber a regra? Vamos definir a região do plot como &#916;'. A regra é: &#916;' = escala* &#916; Vamos calcular a região do plot dos exemplos que estamos trabalhando:
+O cálculo dos limites da escala de leitura é importante para definir os números que vão ser escritos nos eixos. No papel milimetrado, é comum escrever a escala de leitura a cada divisão maior. 
+
+Para que o gráfico fique bem centralizado, devemos entender o espaço que os dados ocupam na região do plot. Os dados vão ocupar o espaço do &#916; que aprendemos a calcular na seção anterior. O espaço do plot depende da escala que vamos utilizar. Por exemplo: se a escala usada vai ser de 1 unidade por divisão e o número de divisões é 180, a região do plot será de 180 unidades. Se o número de divisões for 280, então a região do plot será 280 unidades. Se a escala do plot for 0.5 e o número de divisões for 180, então a região do plot será de 90 undidades. Se o número de divisões for 280, então a região do plot será de 140. Acompanhouu até aqui? Já consegue perceber a regra? Vamos definir a região do plot como &#916;'. A regra é: &#916;' = escala\*número de divisões. Vamos calcular a região do plot dos exemplos que estamos trabalhando. Vamos considerar que o eixo x terá 180 divisões e o eixo y, 280 divisões:
 ***
-x<sub>1</sub>
+&#916;'x<sub>1</sub> = 3.6
+&#916;'x<sub>2</sub> = 9
+&#916;'x<sub>3</sub> = 1800
+&#916;'y<sub>1</sub> = 140
+&#916;'y<sub>2</sub> = 140
+&#916;'y<sub>3</sub> = 14000
+***
 
+Podemos notar que a região do plot é sempre maior que a região dos dados (se não for, algum cálculo está errado). Devido a isso, sempre haverá uma região do gráfico sem dados. Idealmente, essa região ficará distribuída igualmente ao redor do gráfico. Para isso, vamos definir uma variável cahamada "sobra". Essa sobra nada mais é que a diferença entre a região dos dados e a região do plot, ou seja, a sobra é &#916;'-&#916;. Continuando com os exemplos, temos:
+***
+sobra_x<sub>1<\sub> = 0.9
+sobra_x<sub>2<\sub> = 5
+sobra_x<sub>3<\sub> = 217.8
+sobra_y<sub>1<\sub> = 58.2
+sobra_y<sub>2<\sub> = 50
+sobra_y<sub>3<\sub> = 7670.4
 
-
-Como padrão recomendado, vamos escrever as escalas de leitura arredondando o limite calculado para 1, 2 ou 5 mais próximo, dependendo se a mantissa da escala for respectivamente 1,2 ou 5.
-
+Os limites da escala do plot deverão se tais que a "sobra" fique metade acima e metade abaixo dos dados, para garantir que os dados fiquem bem no meio. Para isso, dividimos a sobra por 2 e somamos ao menor valor dos dados. Conseguimos assim, obter um limite inferior para o plot. Seguindo os exemplos:
+***    
+x<sub>1 min<\sub> = 0 + sobra_x<sub>1<\sub>/2 = 
+***
+Como padrão recomendado, vamos escrever as escalas de leitura arredondando o limite calculado para 1, 2 ou 5 mais próximo, dependendo se a mantissa da escala for respectivamente 1, 2 ou 5. Assim, evitamos uma escala de leitura que varia de 10 em 10 como \[11, 21, 31,...\]. Nada elegante, certo? Se vai caminhar de 2 em 2, use número pares. Se vai caminhar de 5 em 5, privilegie os múltilos de 5. Se vai de 10 em 10, use múltiplos de 10. Isso não é uma regra, mas é uma boa prática. Reparem que os programas de plotar gráficos seguem estritamente essa prática. Para os exemplos em questão:
+***
+***
+Nesse ponto, é sempre bom conferir se os dados estão dentro da região definida pelos limites calculados. Se não estiver, cofira seus cálculos.
+    
+    
+    
+    
+    
+    
+    
 ## Como usar a aplicação
 
 O objetivo da aplicação é:
