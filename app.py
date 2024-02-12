@@ -43,6 +43,7 @@ with st.sidebar:
 # GERAR O PAPEL
 
 def gravar_dados(dados):
+    dados.fillna(0, inplace=True)
     st.session_state['dados'] = dados
 
 def fexp(number):
@@ -91,19 +92,22 @@ def calcular_escala(h, v, dados):
         div_v = np.array([limite_bom_y-escala_y*v+escala_y*10*i for i in range(0,int(v/10+1))])
 
         # Conversão da escala para milímetro.
-        x_mm = (dados['x'] - div_h[0]) / escala_x
-        y_mm = (dados['y']+dados['erro'] - div_v[0]) / escala_y
+        dados_mm = pd.DataFrame()
+        dados_mm['x (mm)'] = (dados['x'] - div_h[0]) / escala_x
+        dados_mm['y (mm)'] = (dados['y']+dados['erro'] - div_v[0]) / escala_y
+        dados_mm['incerteza padrão (mm)'] = dados['erro'] / escala_y # tamanho da incerteza
 
     else:
         div_h = np.arange(0, h+1, 10)
         div_v = np.arange(0, v+1, 10)
+        dados_mm = None
     
     div_v_intervalo = div_v.max() - div_v.min()
     div_h_intervalo = div_h.max() - div_h.min()
 
     aspect_ratio = (v/div_v_intervalo) / (h/div_h_intervalo)
 
-    return div_h, div_v, aspect_ratio
+    return div_h, div_v, aspect_ratio, dados_mm
 
 
 @st.cache_data
@@ -121,11 +125,11 @@ def gerar_papel(div_h, div_v, aspect_ratio):
     ax.set_ylim(div_v[0],div_v[-1])
 
     # grid lines
-    ax.grid(which = "major")
-    ax.grid(which = "minor", alpha = 0.2)
+    ax.grid(which = 'major')
+    ax.grid(which = 'minor', alpha = 0.2)
     ax.set_axisbelow(True)
 
-    ax.tick_params(which = "minor", bottom = False, left = False)
+    ax.tick_params(which = 'minor', bottom = False, left = False)
 
     #  major grid do eixo horizontal
     ax.xaxis.set_major_locator(FixedLocator(div_h))
@@ -136,13 +140,15 @@ def gerar_papel(div_h, div_v, aspect_ratio):
     # Minor grid dividindo o major grid em 10
     ax.xaxis.set_minor_locator(AutoMinorLocator(10))
     ax.yaxis.set_minor_locator(AutoMinorLocator(10))
+
     
     return fig, ax
 
 
-div_h, div_v, aspect_ratio = calcular_escala(h, v, dados)
+div_h, div_v, aspect_ratio, dados_mm = calcular_escala(h, v, dados)
 
 fig, ax = gerar_papel(div_h, div_v, aspect_ratio)
+
 
 if isinstance(dados, pd.DataFrame):
     ax.errorbar(
@@ -154,20 +160,29 @@ if isinstance(dados, pd.DataFrame):
         color='green',
         label='dados experimentais',
     )
+    
 
 
 df = pd.DataFrame(columns=['x','y','erro'], dtype='float')
 
-#def plotar
+###########################################################
 
 col1, col2 = st.columns([2,2])
 with col1:
     dados = st.data_editor(df, num_rows='dynamic')
     st.button('plotar', on_click=gravar_dados, args=(dados,))
+    st.dataframe(dados_mm, hide_index=True)
 
 with col2:
     st.pyplot(fig)
 
-
 #############################################################
-# PLOTAR OS DADOS
+# CONVERTER DADOS PARA MM
+xmm = (dados['x'] - div_h[0]) / escala_x
+ymm = (dados['y'] - div_v[0]) / escala_y
+yerrmm = dados['erro'] / escala_y # tamanho da incerteza
+#############################################################
+# BOTÃO DE SALVAR
+
+if st.button('salvar', on_click=gerar_papel, args=(div_h, div_v, aspect_ratio)):
+    st.write("salvando")
