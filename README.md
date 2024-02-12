@@ -132,7 +132,21 @@ x<sub>1 min<\sub> = 0 + sobra_x<sub>1<\sub>/2 =
 Como padrão recomendado, vamos escrever as escalas de leitura arredondando o limite calculado para 1, 2 ou 5 mais próximo, dependendo se a mantissa da escala for respectivamente 1, 2 ou 5. Assim, evitamos uma escala de leitura que varia de 10 em 10 como \[11, 21, 31,...\]. Nada elegante, certo? Se vai caminhar de 2 em 2, use número pares. Se vai caminhar de 5 em 5, privilegie os múltilos de 5. Se vai de 10 em 10, use múltiplos de 10. Isso não é uma regra, mas é uma boa prática. Reparem que os programas de plotar gráficos seguem estritamente essa prática. Para os exemplos em questão:
 ***
 ***
-Nesse ponto, é sempre bom conferir se os dados estão dentro da região definida pelos limites calculados. Se não estiver, cofira seus cálculos.
+Nesse ponto, é sempre bom conferir se os dados estão dentro da região definida pelos limites calculados. Se não estiver, confira seus cálculos.
+
+A partir do valor do limite inferior, podemos calcular a escala de leitura. Como vamos escrever nas diviões maiores, vamos calcular a escala de leitura a cada 10 divisões, ou seja, escrevemos o limite inferior e, depois de 10 divisões, escrevemos o próximo valor que será 10 vezes a escala mais o número anterior. Repetimos o processo até o final do eixo, para os dois eixos. Seguindo com os exemplos:
+***
+***
+
+## Conversão dos dados para unidades de divisão
+
+Neste ponto, já temos uma escala de leitura que permite um plot mais fácil dos dados. Mesmo assim, pode ser conveniente converter os dados para unidades de divisão para plotar só "contando quadradinhos". Para converter os dados, basta, para cada ponto, fazer a diferença entre o valor do dado e o início da escala de leitura e dividir pela escala que calculamos. Reparem que a unidade que resulta do cálculo é divisão! 
+
+Com a tabela de dados convertidos, só resta contar os quadradinhos...
+
+Seguindo os exemplos
+***
+***
     
     
     
