@@ -1,0 +1,21 @@
+
+_______________________________________________________
+Resultados dos coeficientes do método do paralelogramo:
+
+reta com maior coeficiente angular:
+a_max = 1.2566666666666666
+b_min = -176.8933333333333
+
+reta com menor coeficiente angular:
+a_min = 0.7433333333333335
+b_max = -31.10666666666671
+_______________________________________________________
+Resultados dos coeficientes da reta y = a x + b:
+
+a = 1.0
+erro de a = 0.3
+
+b = -104.0
+erro de b = 70.0
+
+  
