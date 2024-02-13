@@ -1,4 +1,5 @@
 from decimal import Decimal
+from io import BytesIO
 
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator, FixedLocator
@@ -31,6 +32,11 @@ with st.sidebar:
         v = st.number_input(
             "vertical", value=280, min_value=100, max_value=300, step=10
         )
+
+    titulo = st.text_input(
+        label="título do gráfico",
+        value="Papel milimetrado",
+    )
 
     xlabel = st.text_input(
         label="nome do eixo horizontal",
@@ -193,6 +199,50 @@ def plot(h, v, dados, xlabel, ylabel):
         dados_mm,
     ) = escala(h, v, dados)
 
+    try:
+        arquivo = f"""________________________________________________
+Resultados eixo horizontal:
+
+\u0394 = {round(delta_x,10)}
+
+escala natural = {round(escala_nat_x,10)}
+
+escala = {round(escala_boa_x,10)}
+
+\u0394' = {round(delta_bom_x,10)}
+
+limites = {limite_x}
+
+limites corrigidos = {limite_bom_x}
+
+escala de leitura 
+{div_x}
+
+________________________________________________
+Resultados eixo vertical:
+
+\u0394 = {round(delta_y,10)}
+
+escala natural = {round(escala_nat_y,10)}
+
+escala = {round(escala_boa_y,10)}
+
+\u0394' = {round(delta_bom_y,10)}
+
+limites = {limite_y}
+
+limites corrigidos = {limite_bom_y}
+
+escala de leitura 
+{div_y}
+
+________________________________________________
+Dados em divisões 
+{dados_mm}           
+"""
+    except TypeError:
+        arquivo = "Dados não informados."
+
     # proporcionalização
     ratio = (v / (np.array(div_y).max() - np.array(div_y).min())) / (
         h / (np.array(div_x).max() - np.array(div_x).min())
@@ -202,29 +252,27 @@ def plot(h, v, dados, xlabel, ylabel):
 
     ax.set_aspect(ratio)
 
-    ax.set_title("Papel milimetrado")
+    ax.set_title(titulo)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
 
     ax.set_xlim(div_x[0], div_x[-1])
     ax.set_ylim(div_y[0], div_y[-1])
 
-    # grid lines
-    ax.grid(which="major")
-    ax.grid(which="minor", alpha=0.2)
     ax.set_axisbelow(True)
 
     ax.tick_params(which="minor", bottom=False, left=False)
 
-    #  major grid do eixo horizontal
-    ax.xaxis.set_major_locator(FixedLocator(div_x))
+    ax.set_yticks(div_y)
+    div_y_minor = np.arange(div_y[0], div_y[-1], (div_y[1] - div_y[0]) / 10)
+    ax.hlines(div_y_minor, div_x[0], div_x[-1], lw=0.1, color="lightgray")
 
-    #  major grid do eixo vertical
-    ax.yaxis.set_major_locator(FixedLocator(div_y))
+    ax.set_xticks(div_x)
+    div_x_minor = np.arange(div_x[0], div_x[-1], (div_x[1] - div_x[0]) / 10)
+    ax.vlines(div_x_minor, div_y[0], div_y[-1], lw=0.1, color="lightgray")
 
-    #  minor grid dividindo o major grid em 10
-    ax.xaxis.set_minor_locator(AutoMinorLocator(10))
-    ax.yaxis.set_minor_locator(AutoMinorLocator(10))
+    ax.hlines(div_y, div_x[0], div_x[-1], lw=1, color="darkgray")
+    ax.vlines(div_x, div_y[0], div_y[-1], lw=1, color="darkgray")
 
     # plot
     if not dados.empty:
@@ -238,10 +286,10 @@ def plot(h, v, dados, xlabel, ylabel):
             label="dados experimentais",
         )
 
-    return fig
+    return fig, arquivo
 
 
-fig = plot(h, v, dados, xlabel, ylabel)
+fig, arquivo = plot(h, v, dados, xlabel, ylabel)
 
 df = pd.DataFrame(columns=["x", "y", "erro"], dtype="float")
 
@@ -254,6 +302,24 @@ with col1:
         if plotar:
             gravar_dados(dados)
             st.rerun()
+
+    subcols = st.columns(2)
+    with subcols[0]:
+        st.download_button(
+            label="baixar arquivo",
+            data=arquivo,
+            file_name="arquivo.txt",
+        )
+
+    with subcols[1]:
+        file = BytesIO()
+        fig.savefig(file, format="pdf")
+
+        st.download_button(
+            label="baixar figura",
+            data=file,
+            file_name="figura.pdf",
+        )
 
 with col2:
     st.pyplot(fig)
