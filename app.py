@@ -48,6 +48,14 @@ with st.sidebar:
         value="eixo vertical",
     )
 
+    rot = st.slider(
+        label="rotação dos números da escala horizontal",
+        value=0,
+        min_value=-90,
+        max_value=90,
+        step=1,
+    )
+
 
 #############################################################
 # GERAR O PAPEL
@@ -281,6 +289,9 @@ mp.resuldados@gmail.com
     ax.set_xticks(div_x)
     div_x_minor = np.arange(div_x[0], div_x[-1], (div_x[1] - div_x[0]) / 10)
     ax.vlines(div_x_minor, div_y[0], div_y[-1], lw=0.1, color="lightgray")
+
+    for label in ax.get_xticklabels(which="major"):
+        label.set(rotation=rot)
 
     ax.hlines(div_y, div_x[0], div_x[-1], lw=1, color="darkgray")
     ax.vlines(div_x, div_y[0], div_y[-1], lw=1, color="darkgray")
