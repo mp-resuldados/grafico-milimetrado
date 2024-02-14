@@ -296,6 +296,19 @@ mp.resuldados@gmail.com
     ax.hlines(div_y, div_x[0], div_x[-1], lw=1, color="darkgray")
     ax.vlines(div_x, div_y[0], div_y[-1], lw=1, color="darkgray")
 
+    ax.text(
+        0.5,
+        0.5,
+        "MP-resuldados",
+        transform=ax.transAxes,
+        fontsize=40,
+        color="gray",
+        alpha=0.1,
+        ha="center",
+        va="center",
+        rotation=45,
+    )
+
     # plot
     if not dados.empty:
         ax.errorbar(
