@@ -230,11 +230,11 @@ As abcissas estão representadas no eixo horizontal e ordenadas no eixo vertical
 
 ## Resultados dos exemplos gerados com a aplicação:
 
-![gráfico dos dados de volume em função da massa](./imagens/V (ml) x M (g).png)
+![gráfico dos dados de volume em função da massa](./imagens/V(ml)_x_M(g).png)
 
-![gráfico dos dados de período em função do comprimento do pêndulo](./imagens/T (ms) x L (cm).png)
+![gráfico dos dados de período em função do comprimento do pêndulo](./imagens/T(ms)_x_L(cm).png)
 
-![gráfico dos dados de  frequência em função do comprimento de onda](./imagens/f (Hz) x λ (cm).png)
+![gráfico dos dados de  frequência em função do comprimento de onda](./imagens/f(Hz)_x_λ(cm).png)
 
 
 ## Referências bibliográficas
