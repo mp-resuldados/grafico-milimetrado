@@ -237,9 +237,8 @@ As abcissas estão representadas no eixo horizontal e ordenadas no eixo vertical
 
 ## Referências bibliográficas
 
-![caderno de cabeceira](./imagens/Capa_Barthem.png)
-![livro de cabeceira](./imagens/Capa_Vuolo.png)
-
+<img src="https://github.com/mp-resuldados/grafico-milimetrado/blob/master/imagens/Capa_Barthem.png" height="250">
+<img src="https://github.com/mp-resuldados/grafico-milimetrado/blob/master/imagens/Capa_Vuolo.png" height="250">
 
 -----------------------------------------------------------------------------
 MP-resuldados
