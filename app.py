@@ -22,6 +22,7 @@ dados = st.session_state["dados"]
 # PARÂMETROS DE ENTRADA
 
 with st.sidebar:
+    st.header("MP-resuldados", divider=True)
     st.subheader("Número de divisões:")
     col1, col2 = st.columns(2)
     with col1:
@@ -39,13 +40,21 @@ with st.sidebar:
     )
 
     xlabel = st.text_input(
-        label="nome do eixo horizontal",
+        label="nome do eixo horizontal (unidade)",
         value="eixo horizontal",
     )
 
     ylabel = st.text_input(
-        label="nome do eixo vertical",
+        label="nome do eixo vertical (unidade)",
         value="eixo vertical",
+    )
+
+    rot = st.slider(
+        label="rotação dos números da escala horizontal",
+        value=0,
+        min_value=-90,
+        max_value=90,
+        step=1,
     )
 
 
@@ -161,6 +170,8 @@ def escala(h, v, dados):
         dados_mm = None
 
     return (
+        h,
+        v,
         delta_x,
         delta_y,
         escala_nat_x,
@@ -182,6 +193,8 @@ def escala(h, v, dados):
 def plot(h, v, dados, xlabel, ylabel):
     # cálculo da escala
     (
+        h,
+        v,
         delta_x,
         delta_y,
         escala_nat_x,
@@ -200,7 +213,9 @@ def plot(h, v, dados, xlabel, ylabel):
     ) = escala(h, v, dados)
 
     try:
-        arquivo = f"""________________________________________________
+        arquivo = f"""{h} divisões na horizontal
+{v} divisões na vertical
+________________________________________________
 Resultados eixo horizontal:
 
 \u0394 = {round(delta_x,10)}
@@ -239,6 +254,11 @@ escala de leitura
 ________________________________________________
 Dados em divisões 
 {dados_mm}           
+
+-----------------------------------------------------------------------------
+MP-resuldados
+Dos dados aos resultados. Um pouco de física, matemática, negócios e finanças.
+mp.resuldados@gmail.com
 """
     except TypeError:
         arquivo = "Dados não informados."
@@ -271,8 +291,24 @@ Dados em divisões
     div_x_minor = np.arange(div_x[0], div_x[-1], (div_x[1] - div_x[0]) / 10)
     ax.vlines(div_x_minor, div_y[0], div_y[-1], lw=0.1, color="lightgray")
 
+    for label in ax.get_xticklabels(which="major"):
+        label.set(rotation=rot)
+
     ax.hlines(div_y, div_x[0], div_x[-1], lw=1, color="darkgray")
     ax.vlines(div_x, div_y[0], div_y[-1], lw=1, color="darkgray")
+
+    ax.text(
+        0.5,
+        0.5,
+        "MP-resuldados",
+        transform=ax.transAxes,
+        fontsize=40,
+        color="gray",
+        alpha=0.1,
+        ha="center",
+        va="center",
+        rotation=45,
+    )
 
     # plot
     if not dados.empty:
