@@ -22,6 +22,7 @@ dados = st.session_state["dados"]
 # PARÂMETROS DE ENTRADA
 
 with st.sidebar:
+    st.header("MP-resuldados", divider=True)
     st.subheader("Número de divisões:")
     col1, col2 = st.columns(2)
     with col1:
@@ -39,12 +40,12 @@ with st.sidebar:
     )
 
     xlabel = st.text_input(
-        label="nome do eixo horizontal",
+        label="nome do eixo horizontal (unidade)",
         value="eixo horizontal",
     )
 
     ylabel = st.text_input(
-        label="nome do eixo vertical",
+        label="nome do eixo vertical (unidade)",
         value="eixo vertical",
     )
 
