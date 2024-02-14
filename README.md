@@ -40,49 +40,74 @@ Vamos calcular a escala para um papel de 180 divisões na horizontal e 280 na ve
 O primeiro conjunto de dados é uma medida para obter a densidade da água. Utilizamos uma barra de metal que, pendurada em um tripé, pode ser deslocada para dentro de uma proveta com água que fica em cima de uma balança. Medimos, para cada porção de barra submersa, a massa em gramas na balança e o volume em mililitros na proveta graduada. O plot é feito com a massa no eixo horizontal e o volume com sua barra de erro no vertical.
 
 M = \[260, 266, 272, 278, 284, 290, 296, 302, 308\] g
+
 V = \[156, 162, 168, 174, 180, 186, 192, 198, 204\] ml
+
 &#963;V = \[1, 1, 1, 1, 1, 1, 1, 1, 1\] ml
 
+
 &#916;M = 48 g 
-escala natural = 48 g / 180 divisões = 0.2666... g/divisões
-escala ideal = 0.5 g/divisões
+
+escala natural = 48 g / 180 divisões = 0.2666... g/divisão
+
+escala ideal = 0.5 g/divisão
 
 Para os dados que contém incerteza, é imprescindível calcular os limites e o respectivo &#916; considerando as barras de erro.
 
+
 &#916;V = 50 ml
-escala natural = 50 ml / 280 divisões = 0.1785714296 ml/divisões
-escala ideal = 0.2 ml/divisões
+
+escala natural = 50 ml / 280 divisões = 0.1785714296 ml/divisão
+
+escala ideal = 0.2 ml/divisão
+
 
 O segundo conjunto de dados se refere ao período de um pêndulo simples medido com um cronômetro. Cada medida abaixo é dada pelo valor médio de 25 períodos medidos para um dado comprimento do fio. O plot é feito com o comprimento do pêndulo na horizontal e o valor do período na vertical.
+
 L = \[149.5, 137.5, 126.5, 113.5, 100.5\] cm
+
 T = \[2427, 2330, 2251, 2106, 1993\] ms
+
 &#963;T = \[4, 4, 6, 7, 5]\] ms
 
+
 &#916;L = 49 cm
+
 escala natural = 49 cm / 180 divisões = 0.27222... cm/divisão
-escala ideal = 0.5 cm/divisões
+
+escala ideal = 0.5 cm/divisão
 
 Como os dados que contém incerteza, vamos calcular os limites e o respectivo &#916; considerando as barras de erro.
 
 &#916;T = 443 ms
+
 escala natural = 443 ms / 280 divisões = 1.5821428571 ms/divisão
-escala ideal = 2 ml/divisões
+
+escala ideal = 2 ml/divisão
+
 
 O terceiro conjunto de dados se refere ao comprimento de onda em uma corda vibrante. A medida é feita com as extremidades da corda fixas. Variando a frequência a qual a corda é submetida, medimos o comprimento da onda com uma régua quando ela está oscilando em um harmônico. O plot é feito com o comprimento de onda na horizontal e a frequência na vertical.
 
 &#955; = \[334, 167, 111, 84, 67, 56, 48\] cm
+
 f = \[12, 24, 36, 48, 59, 72, 83\] Hz
+
 &#963;f = \[2, 2, 2, 2, 2, 2, 2]\] Hz
 
+
 &#916;&#955; = 286 cm
+
 escala natural = 286 cm / 180 divisões = 1.5888... cm/divisão
-escala ideal = 2 cm/divisões
+
+escala ideal = 2 cm/divisão
 
 Lembrando que precisamos calcular os limites e o respectivo &#916; considerando as barras de erro.
 
 &#916;&#955; = 75 Hz
+
 escala natural = 75 ms / 280 divisões = 0.2678571429 ms/divisão
-escala ideal = 0.5 ml/divisões
+
+escala ideal = 0.5 ml/divisão
 
 De posse da escala ideal para a construção do gráfico, vamos pensar na escala de leitura.
 
@@ -96,37 +121,57 @@ O cálculo dos limites da escala de leitura é importante para definir os númer
 Para que o gráfico fique bem centralizado, devemos conhecer o espaço que os dados ocupam na região do plot. Os dados vão ocupar o espaço do &#916; que aprendemos a calcular na seção anterior. O espaço do plot depende da escala que vamos utilizar. Por exemplo: se a escala usada vai ser de 1 unidade por divisão e o número de divisões é 180, a região do plot será de 180 unidades. Se o número de divisões for 280, então a região do plot será 280 unidades. Se a escala do plot for 0.5 e o número de divisões for 180, então a região do plot será de 90 undidades. Se o número de divisões for 280, então a região do plot será de 140. Acompanhouu até aqui? Já consegue perceber a regra? Vamos definir a região do plot como &#916;'. A regra é: &#916;' = escala\*número de divisões. Vamos calcular a região do plot dos exemplos que estamos trabalhando. Lembrando que consideramos que o eixo x terá 180 divisões e o eixo y, 280 divisões:
 
 &#916;'M = 90 g
+
 &#916;'V = 56 ml
+
 &#916;'L = 90 cm
+
 &#916;'T = 560 ms
+
 &#916;'&#955; = 360 cm
+
 &#916;'f = 140 Hz
 
 Podemos notar que a região do plot é sempre maior que a região dos dados (se não for, algum cálculo está errado). Devido a isso, sempre haverá uma região do gráfico sem dados. Idealmente, essa região ficará distribuída igualmente ao redor do gráfico. Para isso, vamos definir uma variável cahamada "sobra". Essa sobra nada mais é que a diferença entre a região dos dados e a região do plot, ou seja, a sobra é &#916;'-&#916;. Calculando a sobra dos exemplos que estamos trabalhando:
 
 sobra de M = 42 g
+
 sobra de V = 6 ml
+
 sobra de L = 41 cm
+
 sobra de T = 117 ms
+
 sobra de &#955; = 74 cm
+
 sobra de f = 65 Hz
 
 Os limites da escala do plot deverão se tais que a "sobra" fique metade acima e metade abaixo dos dados, para garantir que os dados fiquem bem no meio. Para isso, dividimos a sobra por 2 e diminuimos do menor valor dos dados (não esqueça de considerar a barra de erro!). Conseguimos assim, obter um limite inferior para o plot. Seguindo os exemplos, calculamos o limite inferior:
 
 para M = 260 - 42/2 = 239 g
+
 para V = 155 - 6/2 = 152 ml
+
 para L = 100.5 - 41/2 = 80 cm
+
 para T = 1988 - 117/2 = 1929.5 ms
+
 para &#955; = 48 - 74/2 = 11 cm
+
 para f = 10 - 65/2 = -22.5 Hz
     
 Como padrão recomendado, vamos escrever as escalas de leitura arredondando o limite inferior calculado para 1, 2 ou 5 mais próximo, dependendo se a mantissa do passo for respectivamente 1, 2 ou 5. O passo é definido pelo intervalo que os valores vão ser escritos na escala. Vamos adotar um passo de 10 vezes o valor da escala, ou seja, escrever os números nas divisões maiores do papel. Fazendo o arredondamento, evitamos uma escala de leitura que varia de 10 em 10 como \[11, 21, 31,...\]. Nada elegante, certo? A dica é simples, se vai caminhar de 2 em 2, use número pares. Se vai caminhar de 5 em 5, privilegie os múltilos de 5. Se vai de 10 em 10, use múltiplos de 10... Isso não é uma regra, mas é uma boa prática. Reparem que os programas de plotar gráficos seguem estritamente essa prática. Para os exemplos em questão, vamos arredondar o limite inferior calculado acima:
 
 para M (escala de 0.5, passo de 5) = 240 g
+
 para V (escala de 0.2, passo de 2)=  152 ml
+
 para L (escala de 0.5, passo de 5)=  80 cm
+
 para T (escala de 2, passo de 20)= 1920 ms
+
 para &#955; (escala de 2, passo de 20)= 20 cm
+
 para f (escala de 0.5, passo de 5)= -20 Hz
 
 Tente arredondar para o número mais próximo possível e verifique se os dados ficaram dentro da região do plot.
@@ -134,13 +179,19 @@ Tente arredondar para o número mais próximo possível e verifique se os dados 
 A partir do valor do limite inferior, podemos calcular a escala de leitura. Como vamos escrever nas diviões maiores, vamos calcular a escala de leitura a cada 10 divisões, ou seja, escrevemos o limite inferior e, depois de 10 divisões, escrevemos o próximo valor que será 10 vezes a escala mais o número anterior. Repetimos o processo até o final do eixo, para os dois eixos. Seguindo com os exemplos:
 
 para M = \[240, 245, 250 ... 320, 325, 330\]
+
 para V = \[152, 154, 156 ... 204, 206, 208\]
+
 para L = \[80, 85, 90 ... 160, 165, 170\]
+
 para T = \[1920, 1940, 1960 ... 2440, 2460, 2480\]
-para &#955; = \[20, 40, 60 ... 340, 360, 380]\
-para f = \[-20, -15, -10 ... 110, 115, 120]\
+
+para &#955; = \[20, 40, 60 ... 340, 360, 380\]
+
+para f = \[-20, -15, -10 ... 110, 115, 120\]
 
 Com isso, já temos o "esqueleto" do gráfico. Na maioria dos caso, já é suficiente para fazer o plot com facilidade. Caso os dados sejam mais complicados, vale a pena converte-los para unidades de divisões antes de plotar.
+
 
 ## Conversão dos dados para unidades de divisão
 
@@ -148,13 +199,19 @@ Neste ponto, já temos uma escala de leitura que permite um plot mais fácil dos
 
 Calculando a conversão para o primeiro ponto das tabelas dos exemplos:
 M = (260 - 240)g / (0.5 g/divisão) = 40 divisões
+
 V = (156 - 152)g / (0.2 ml/divisão) = 20 divisões
+
 L = (149.5 - 80)g / (0.5 cm/divisão) = 139 divisões
+
 T = (2427 - 1920)g / (2 ms/divisão) = 253.5 divisões
+
 &#955; = (334 - 20)g / (2 cm/divisão) = 157 divisões
+
 f = (12 - (-20))g / (0.5 Hz/divisão) = 64 divisões
 
 A resolução da escala do papel é metade da divisão. Com isso, ao converter os dado em unidades de divisão, lembrem-se de arredondar para 0 ou 0.5 divisão. Não temos resolução visual (nem da caneta!) para dividir um quadradinho minúsculo em 3 ou 4 partes, certo? Dito isto e com a tabela de dados convertidos, só resta contar os quadradinhos... 
+
 
 ## Como usar a aplicação
 
