@@ -161,6 +161,8 @@ def escala(h, v, dados):
         dados_mm = None
 
     return (
+        h,
+        v,
         delta_x,
         delta_y,
         escala_nat_x,
@@ -182,6 +184,8 @@ def escala(h, v, dados):
 def plot(h, v, dados, xlabel, ylabel):
     # cálculo da escala
     (
+        h,
+        v,
         delta_x,
         delta_y,
         escala_nat_x,
@@ -200,7 +204,9 @@ def plot(h, v, dados, xlabel, ylabel):
     ) = escala(h, v, dados)
 
     try:
-        arquivo = f"""________________________________________________
+        arquivo = f"""{h} divisões na horizontal
+{v} divisões na vertical
+________________________________________________
 Resultados eixo horizontal:
 
 \u0394 = {round(delta_x,10)}
@@ -239,6 +245,11 @@ escala de leitura
 ________________________________________________
 Dados em divisões 
 {dados_mm}           
+
+-----------------------------------------------------------------------------
+MP-resuldados
+Dos dados aos resultados. Um pouco de física, matemática, negócios e finanças.
+mp.resuldados@gmail.com
 """
     except TypeError:
         arquivo = "Dados não informados."
