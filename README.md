@@ -7,7 +7,7 @@ Neste trabalho, mostramos como plotar um gráfico perfeito em papel milimetrado 
 
 Desenvolvemos também uma aplicação para gerar um papel com a quantidade de divisões desejada e plotar os gráficos. A aplicação é bastante auto-explicativa mas, no fim do texto, escrevemos uma breve seção de como utilizar. Segue o link para a aplicação em streamlit:
 
-[grafico-milimetrado](https://grafico-milimetrado.streamlit.app/).
+[grafico-milimetrado](https://grafico-milimetrado.streamlit.app/)
 
 
 
