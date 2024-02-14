@@ -1,13 +1,15 @@
 # Construção de gráficos em papel milimetrado
 
-*(repositório em construção)*
-
 
 ## Introdução
 
 Neste trabalho, mostramos como plotar um gráfico perfeito em papel milimetrado e como converter os dados para um plot mais simples e rápido. As seções abaixo ensinam o passo-a-passo desde o cálculo da melhor escala até o plot dos dados e barras de erros.
 
-Desenvolvemos também uma aplicação para gerar um papel com a quantidade de divisões desejada e plotar os gráficos. A aplicação é bastante auto-explicativa mas, no fim do texto, escrevemos uma breve seção de como utilizar.
+Desenvolvemos também uma aplicação para gerar um papel com a quantidade de divisões desejada e plotar os gráficos. A aplicação é bastante auto-explicativa mas, no fim do texto, escrevemos uma breve seção de como utilizar. Segue o link para a aplicação em streamlit:
+
+[grafico-milimetrado](https://grafico-milimetrado.streamlit.app/).
+
+
 
 
 ## Objetivos
