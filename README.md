@@ -33,11 +33,9 @@ A escala ideal para um gráfico é aquela em que o gráfico fica bem visível no
 
 O primeiro passo para calcular a escala ideal para o gráfico é conhecer os limites dos dados que queremos plotar. Vamos usar um exemplo para tornar a explicação mais clara e interativa. Pensando no conjunto de dados x =  \[10, 20, 30, 40, 50\], os limites de x são 10 e 50. Ou seja, o x varia entre 10 e 50, tendo um &#916;x = 50-10 = 40. A escala natural para o gráfico seria dividir esse &#916;x pelo número de divisões no papel. Como exemplo, vamos usar um papel com 180 divisões na horizontal. Assim, a escala natural seria 40/180 = 0.2777... . Mas uma escala dízima não parece uma boa ideia, certo? 
 
-Para o cálculo da escala ideal vamos usar o padrão recomendável de que a escala deve ter a mantissa 1, 2 ou 5. Ou seja, deve ser sempre 1, 2, ou 5 vezes uma potência de 10 (10<sup>-1</sup>, 10<sup>0</sup>, 10&sup1;, 10&sup2;...). Com isso, a escala fica de fácil leitura e interpolação. No exemplo, temos uma escala natural de 2.777 &middot; 10<sup>-1</sup>; com mantissa 2.777... . Para manter o padrão recomendado, precisamos arredondar o valor da mantissa para 1, 2 ou 5, respeitando a condição de que o valor seja imediatamente maior que a mantissa da escala natural (ou os dados não vão caber no gráfico) Com isso, garantimos que os dados ocupem a maior área possível. Nesse caso, a escala ideal terá mantissa 5 e será dada por 5 &middot;10<sup>-1</sup>, ou seja, a escala ideal do exemplo é 0.5.
+Para o cálculo da escala ideal vamos usar o padrão recomendável de que a escala deve ter a mantissa 1, 2 ou 5. Ou seja, deve ser sempre 1, 2, ou 5 vezes uma potência de 10 (10<sup>-1</sup>, 10<sup>0</sup>, 10&sup1;, 10&sup2;...). Com isso, a escala fica de fácil leitura e interpolação. No exemplo, temos uma escala natural de 2.777 &middot; 10<sup>-1</sup>; com mantissa 2.777... . Para manter o padrão recomendado, precisamos arredondar o valor da mantissa para 1, 2 ou 5, respeitando a condição de que o valor seja imediatamente maior que a mantissa da escala natural. Com isso, garantimos que os dados caibam no papel ocupando a maior área possível. No exemplo, a escala ideal terá mantissa 5 e será dada por 5 &middot;10<sup>-1</sup>, ou seja, a escala ideal é 0.5.
 
-Para treinar os cálculos, vamos adotar 3 exemplos. São 3 conjuntos de dados de medidas reais realizadas no Laboratório de Física Esperimental 2 da UFRJ no ano de 2023. Vamos realizar os cálculos de escala passo a passo seguindo as seções do texto. 
-
-Vamos calcular a escala para um papel de 180 divisões na horizontal e 280 na vertical. É um papel bem comum, encontrado para vender em qualquer papelaria.
+Para treinar os cálculos, vamos adotar 3 exemplos. São 3 conjuntos de dados de medidas reais realizadas no Laboratório de Física Esperimental 2 da UFRJ no ano de 2023. Vamos realizar os cálculos de escala passo a passo seguindo as seções do texto. Vamos calcular a escala para um papel de 180 divisões na horizontal e 280 na vertical. É um papel bem comum, encontrado para vender em qualquer papelaria.
 
 O primeiro conjunto de dados é uma medida para obter a densidade da água. Utilizamos uma barra de metal que, pendurada em um tripé, pode ser deslocada para dentro de uma proveta com água que fica em cima de uma balança. Medimos, para cada porção de barra submersa, a massa em gramas na balança e o volume em mililitros na proveta graduada. O plot é feito com a massa no eixo horizontal e o volume com sua barra de erro no vertical.
 
@@ -54,7 +52,7 @@ escala natural = 48 g / 180 divisões = 0.2666... g/divisão
 
 escala ideal = 0.5 g/divisão
 
-Para os dados que contém incerteza, é imprescindível calcular os limites e o respectivo &#916; considerando as barras de erro.
+Para os dados que contém incerteza, é imprescindível calcular os limites e o respectivo &#916; considerando os limite das barras de erro.
 
 
 &#916;V = 50 ml
@@ -103,7 +101,7 @@ escala natural = 286 cm / 180 divisões = 1.5888... cm/divisão
 
 escala ideal = 2 cm/divisão
 
-Lembrando que precisamos calcular os limites e o respectivo &#916; considerando as barras de erro.
+Lembrando que precisamos calcular os limites e o respectivo &#916; considerando os limites das barras de erro.
 
 &#916;&#955; = 75 Hz
 
@@ -148,7 +146,7 @@ sobra de &#955; = 74 cm
 
 sobra de f = 65 Hz
 
-Os limites da escala do plot deverão se tais que a "sobra" fique metade acima e metade abaixo dos dados, para garantir que os dados fiquem bem no meio. Para isso, dividimos a sobra por 2 e diminuimos do menor valor dos dados (não esqueça de considerar a barra de erro!). Conseguimos assim, obter um limite inferior para o plot. Seguindo os exemplos, calculamos o limite inferior:
+Os limites da escala do plot deverão ser tais que a "sobra" fique metade acima e metade abaixo dos dados, para garantir que os dados fiquem bem no meio. Para isso, dividimos a sobra por 2 e diminuimos do menor valor dos dados (não esqueça de considerar os limites da barra de erro!). Conseguimos assim, obter um limite inferior para o plot. Seguindo os exemplos, calculamos o limite inferior:
 
 para M = 260 - 42/2 = 239 g
 
@@ -192,7 +190,7 @@ para &#955; = \[20, 40, 60 ... 340, 360, 380\]
 
 para f = \[-20, -15, -10 ... 110, 115, 120\]
 
-Com isso, já temos o "esqueleto" do gráfico. Na maioria dos caso, já é suficiente para fazer o plot com facilidade. Caso os dados sejam mais complicados, vale a pena converte-los para unidades de divisões antes de plotar.
+Com isso, já temos o "esqueleto" do gráfico. Na maioria dos caso, isso já é suficiente para fazer o plot com facilidade. Caso os dados sejam mais complicados, vale a pena converte-los para unidades de divisões antes de plotar.
 
 
 ## Conversão dos dados para unidades de divisão
@@ -213,6 +211,18 @@ T = (2427 - 1920)g / (2 ms/divisão) = 253.5 divisões
 f = (12 - (-20))g / (0.5 Hz/divisão) = 64 divisões
 
 A resolução da escala do papel é metade da divisão. Com isso, ao converter os dado em unidades de divisão, lembrem-se de arredondar para 0 ou 0.5 divisão. Não temos resolução visual (nem da caneta!) para dividir um quadradinho minúsculo em 3 ou 4 partes, certo? Dito isto e com a tabela de dados convertidos, só resta contar os quadradinhos... 
+
+Depois do plot de todos os pontos, só resta desenhar as barras de erro. A conversão do tamanho da incerteza para divisões, se faz apenas dividindo o valor do dado pela escala que escolhemos. Seguindo com os exemplos:
+
+para V = \[5, 5, 5 ... \]
+
+para T = \[2, 2, 3, 3.5, 2.5\]
+
+para f = \[4, 4, 4, ...\]
+
+Atentem para o fato da barra de erro ser duas vezes o valor da incerteza padrão. Então, a barra de erro vai ter o tamanho de uma incerteza para cima e uma para baixo. 
+
+Espero que, nesse ponto, já consigam plotar um bom gráfico! Se tiverem dúvidas ou dificuldade em algum dos pontos, não hesitem em pedir ajuda. Perguntem ao seu professor ou mandem um e-mail para mp.resuldados@gmail.com.
 
 
 ## Como usar a aplicação
