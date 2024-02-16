@@ -219,17 +219,11 @@ ________________________________________________
 Resultados eixo horizontal:
 
 \u0394 = {round(delta_x,10)}
-
 escala natural = {round(escala_nat_x,10)}
-
 escala = {round(escala_boa_x,10)}
-
 \u0394' = {round(delta_bom_x,10)}
-
 limites = {limite_x}
-
 limites corrigidos = {limite_bom_x}
-
 escala de leitura 
 {div_x}
 
@@ -237,17 +231,11 @@ ________________________________________________
 Resultados eixo vertical:
 
 \u0394 = {round(delta_y,10)}
-
 escala natural = {round(escala_nat_y,10)}
-
 escala = {round(escala_boa_y,10)}
-
 \u0394' = {round(delta_bom_y,10)}
-
 limites = {limite_y}
-
 limites corrigidos = {limite_bom_y}
-
 escala de leitura 
 {div_y}
 
@@ -342,7 +330,7 @@ with col1:
     subcols = st.columns(2)
     with subcols[0]:
         st.download_button(
-            label="baixar arquivo",
+            label="baixar resultados",
             data=arquivo,
             file_name="arquivo.txt",
         )
