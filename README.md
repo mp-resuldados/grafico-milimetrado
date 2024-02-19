@@ -254,4 +254,5 @@ As abcissas estão representadas no eixo horizontal e ordenadas no eixo vertical
 
 -----------------------------------------------------------------------------
 MP-resuldados
+
 Dos dados aos resultados. Um pouco de física, matemática, negócios e finanças.
